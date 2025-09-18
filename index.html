@@ -7,8 +7,6 @@
   <meta name="description" content="Grab early access. Get weekly high-protein prep tips and founder updates." />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <style>
-    :root { --max: 960px; }
-
     html, body {
       margin: 0;
       height: 100%;
@@ -29,7 +27,7 @@
       text-align: center;
     }
 
-    /* Logo (doubled size) */
+    /* Logo bigger */
     .logo img {
       height: 300px;  /* doubled */
       width: auto;
@@ -46,7 +44,7 @@
       font-size: clamp(16px, 2.5vw, 18px);
       color: #334155;
       margin: 0 auto;
-      max-width: 700px;
+      max-width: 640px;
     }
 
     .card {
@@ -55,10 +53,10 @@
       border-radius: 16px;
       box-shadow: 0 6px 24px rgba(2,6,23,.06);
       padding: 24px;
-      max-width: 560px;
+      max-width: 420px;   /* narrower form box */
       width: 100%;
       margin-top: 28px;
-      text-align: center; /* center text inside the form card */
+      text-align: center;
     }
 
     h2 { margin: 0 0 10px; font-size: 22px; }
@@ -69,7 +67,7 @@
       color: #475569;
       display: block;
       margin: 10px 0 6px;
-      text-align: center; /* center labels */
+      text-align: center;
     }
     input, textarea {
       width: 100%;
@@ -78,7 +76,7 @@
       padding: 12px;
       font: inherit;
       background: #fff;
-      text-align: center; /* center text in inputs */
+      text-align: center;
     }
     textarea { min-height: 110px; }
 
@@ -94,6 +92,7 @@
       cursor: pointer;
       margin-top: 12px;
       transition: background .2s ease;
+      width: 100%;
     }
     .btn:hover { background: #0284c7; }
     .btn:disabled { opacity: .6; cursor: not-allowed; }
