@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>50 Grams — High-Protein Meals, Made Easy</title>
-<meta name="description" content="Grab early access. Get weekly high‑protein prep tips and founder updates." />
+<meta name="description" content="Grab early access. Get weekly high-protein prep tips and founder updates." />
 <style>
 :root { --max: 960px; }
 html,body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif; color:#0f172a; background:#f8fafc; }
@@ -13,40 +13,89 @@ h1 { font-size: clamp(28px, 5vw, 44px); margin: 0 0 8px; letter-spacing:-0.02em;
 p.lead { font-size: clamp(16px, 2.5vw, 18px); color:#334155; margin:0 auto; max-width: 700px; }
 .wrap { max-width: var(--max); margin: 24px auto; padding: 0 20px 60px; }
 .card { background:white; border:1px solid #e5e7eb; border-radius: 16px; box-shadow: 0 6px 24px rgba(2,6,23,0.06); padding: 20px; }
-.grid { display:grid; gap:20px; grid-template-columns: 1fr; }
-@media (min-width: 900px){ .grid { grid-template-columns: 1.2fr .8fr; } }
-h2 { margin:0 0 12px; font-size:22px; }
-.muted { color:#475569; font-size:14px; }
-.ghl-embed { background:#f1f5f9; border:1px dashed #cbd5e1; border-radius:12px; padding:16px; }
+label { font-size:14px; color:#475569; display:block; margin:8px 0 6px; }
+input, textarea { width:100%; border:1px solid #e2e8f0; border-radius:12px; padding:12px; font:inherit; background:#fff; }
 .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:12px; border:1px solid #e2e8f0; background:#0ea5e9; color:white; cursor:pointer; font-weight:600; }
-.btn:disabled { opacity:0.6; cursor:not-allowed; }
-.ai { display:flex; gap:10px; }
-textarea { width:100%; min-height:110px; border:1px solid #e2e8f0; border-radius:12px; padding:12px; font: inherit; background:#ffffff; }
-pre { white-space:pre-wrap; background:#0b1220; color:#e2e8f0; padding:12px; border-radius:12px; overflow:auto; font-size:14px; }
-footer { text-align:center; color:#64748b; padding: 30px 20px; font-size: 13px; }
+.btn:disabled { opacity:.6; cursor:not-allowed; }
+.success { display:none; margin-top:12px; background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; padding:12px; border-radius:12px; }
+.error { display:none; margin-top:12px; background:#fef2f2; color:#991b1b; border:1px solid #fecaca; padding:12px; border-radius:12px; }
+footer { text-align:center; color:#64748b; padding:30px 20px; font-size:13px; }
 .logo { font-weight:800; letter-spacing:0.02em; }
 </style>
 </head>
 <body>
 <header>
-<div class="logo">50 GRAMS</div>
-<h1>High‑Protein Meals, Made Easy</h1>
-<p class="lead">Join the early list for chef‑level proteins with zero hassle. We’ll send founder updates, first‑access promos, and our quick‑start guide.</p>
+  <div class="logo">50 GRAMS</div>
+  <h1>High-Protein Meals, Made Easy</h1>
+  <p class="lead">Join the early list for chef-level proteins with zero hassle. We’ll send founder updates, first-access promos, and our quick-start guide.</p>
 </header>
-<form
-  action="https://formspree.io/f/meolyqnw"
-  method="POST"
->
-  <label>
-    Your email:
-    <input type="email" name="email">
-  </label>
-  <label>
-    Your message:
-    <textarea name="Sign up for a Free Smart Cooker"></textarea>
-  </label>
-  <!-- your other form fields go here -->
-  <button type="submit">Send</button>
-</form>
 
+<div class="wrap">
+  <section class="card">
+    <h2 style="margin:0 0 12px;font-size:22px;">Get on the list</h2>
+    <p class="muted" style="margin:0 0 12px;">Free via Formspree (50 submissions/month on the free tier).</p>
+
+    <form id="fs-form" action="https://formspree.io/f/meolyqnw" method="POST">
+      <!-- visible fields -->
+      <label for="email">Your email</label>
+      <input id="email" type="email" name="email" placeholder="you@example.com" required>
+
+      <label for="message">Anything you'd like to add? (optional)</label>
+      <textarea id="message" name="message" placeholder="Tell us what protein boxes you want…"></textarea>
+
+      <!-- helpful metadata -->
+      <input type="hidden" name="_subject" value="New signup from 50gprotein.com">
+      <input type="hidden" name="source" value="GitHub Pages landing">
+
+      <!-- honeypot (spam trap) -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <!-- optional redirect AFTER success (uncomment if you make a thanks page) -->
+      <!-- <input type="hidden" name="_redirect" value="https://www.50gprotein.com/thanks.html"> -->
+
+      <button type="submit" class="btn" id="submitBtn">Join Now</button>
+    </form>
+
+    <div class="success" id="fs-success">Thanks! Please check your email to confirm, then you’re on the list.</div>
+    <div class="error" id="fs-error">Something went wrong. Please try again or email info@eatfigo.com.</div>
+  </section>
+</div>
+
+<footer>
+  © <script>document.write(new Date().getFullYear());</script> 50 Grams — Built on GitHub Pages
+</footer>
+
+<script>
+  // Optional JS to show an in-page success message without leaving the site
+  const form = document.getElementById('fs-form');
+  const success = document.getElementById('fs-success');
+  const errorBox = document.getElementById('fs-error');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    success.style.display = 'none';
+    errorBox.style.display = 'none';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        form.reset();
+        success.style.display = 'block';
+      } else {
+        errorBox.style.display = 'block';
+      }
+    } catch (err) {
+      errorBox.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</body>
 </html>
