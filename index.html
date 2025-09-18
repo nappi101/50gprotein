@@ -1,120 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>50g Protein</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>50g Protein — High-Protein, Made Easy</title>
+  <meta name="description" content="Join the early list for chef-level proteins with zero hassle. Get founder updates, first-access promos, and our quick-start guide." />
+  <link rel="icon" href="assets/favicon.png" />
   <style>
+    :root {
+      --bg: #f9fbfd;
+      --text: #0f172a;
+      --muted: #475569;
+      --card: #fff;
+      --border: #e2e8f0;
+      --brand: #0ea5e9;
+      --brand-hover: #0284c7;
+      --shadow: 0 6px 24px rgba(2,6,23,.06);
+      --radius: 14px;
+      --maxw: 640px;
+    }
+    html, body { margin: 0; }
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9fbfd;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       min-height: 100vh;
-      margin: 0;
-      text-align: center; /* Center all text */
+      text-align: center;
     }
-
     .container {
-      max-width: 600px;
-      padding: 20px;
+      width: 100%;
+      max-width: var(--maxw);
+      padding: 28px 18px 48px;
+      margin: 0 auto;
     }
-
     .logo {
       display: block;
-      margin: 0 auto 20px;
-      width: 200px; /* double size */
+      margin: 8px auto 20px;
+      width: 220px;   /* larger logo */
       height: auto;
     }
-
     h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
+      font-size: clamp(28px, 5.4vw, 42px);
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
     }
-
-    p {
-      font-size: 1.1em;
-      margin-bottom: 20px;
+    p.lead {
+      margin: 0 auto 22px;
+      color: var(--muted);
+      max-width: 48ch;
+      font-size: clamp(16px, 2.8vw, 18px);
+      line-height: 1.5;
     }
-
-    .form-container {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center; /* center form text */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 16px 22px;
+      margin: 0 auto;
+      max-width: var(--maxw);
     }
-
-    .form-container h2 {
-      margin-bottom: 5px;
+    .card h2 {
+      margin: 0 0 6px;
+      font-size: 22px;
     }
-
-    .form-container p {
-      margin-bottom: 15px;
-      font-size: 0.95em;
-    }
-
-    form input, form textarea {
-      width: 90%;
-      margin: 10px auto;
-      padding: 10px;
+    .muted { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
+    form { margin-top: 6px; }
+    input, textarea, button {
+      font: inherit;
+      width: min(560px, 92%);
       display: block;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+      margin: 10px auto;
+      padding: 12px 14px;
+      border-radius: 12px;
     }
-
-    form textarea {
-      resize: none;
-      height: 80px;
+    input, textarea {
+      border: 1px solid var(--border);
+      background: #fff;
+      text-align: left; /* keep fields left-aligned while surrounding text stays centered */
     }
-
-    form button {
-      width: 95%;
-      padding: 12px;
-      background: #0099ff;
-      border: none;
-      border-radius: 8px;
+    textarea { resize: vertical; min-height: 96px; }
+    button {
+      border: 1px solid var(--border);
+      background: var(--brand);
       color: #fff;
-      font-size: 18px;
+      font-weight: 700;
       cursor: pointer;
     }
-
-    form button:hover {
-      background: #007acc;
+    button:hover { background: var(--brand-hover); }
+    .notice {
+      display: none;
+      width: min(560px, 92%);
+      margin: 12px auto 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      text-align: left;
     }
-
+    .ok { background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
+    .err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
     footer {
-      margin-top: 20px;
-      font-size: 0.85em;
-      color: #666;
+      margin-top: 22px;
+      color: #64748b;
+      font-size: 13px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="assets/logo.png" alt="50 Grams Logo" class="logo">
+  <main class="container">
+    <img src="assets/logo.png" alt="50 Grams Logo" class="logo" />
 
     <h1>High-Protein,<br>Made Easy</h1>
-    <p>
-      Join the early list for chef-level proteins with zero hassle. 
+    <p class="lead">
+      Join the early list for chef-level proteins with zero hassle.
       We’ll send founder updates, first-access promos, and our quick-start guide.
     </p>
 
-    <div class="form-container">
-      <h2>Get on the list</h2>
-      <p>Sign up for Free Figo Smart Sous Vide.</p>
-      <form id="signup-form" action="https://formspree.io/f/yourformid" method="POST">
-        <input type="email" name="email" placeholder="you@example.com" required>
-        <textarea name="message" placeholder="Tell us what protein boxes you want..."></textarea>
-        <button type="submit">Join Now</button>
-      </form>
-    </div>
+    <section class="card" aria-labelledby="cta">
+      <h2 id="cta">Get on the list</h2>
+      <p class="muted">Sign up for Free Figo Smart Sous Vide.</p>
 
-    <footer>
-      © 2025 50 Grams — Built on GitHub Pages
-    </footer>
-  </div>
+      <form id="signup-form" action="https://formspree.io/f/meolyqnw" method="POST">
+        <input type="email" name="email" placeholder="you@example.com" aria-label="Your email" required />
+        <textarea name="message" placeholder="Tell us what protein boxes you want…" aria-label="Optional message"></textarea>
+
+        <!-- optional metadata -->
+        <input type="hidden" name="_subject" value="New signup from 50gprotein.com" />
+        <input type="hidden" name="source" value="GitHub Pages landing" />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <button type="submit" id="submitBtn">Join Now</button>
+      </form>
+
+      <div id="ok"  class="notice ok">Thanks! Please check your inbox to confirm — you’re almost on the list.</div>
+      <div id="err" class="notice err">Hmm, something went wrong. Please try again or email <a href="mailto:info@eatfigo.com">info@eatfigo.com</a>.</div>
+    </section>
+
+    <footer>© <span id="year"></span> 50 Grams — Built on GitHub Pages</footer>
+  </main>
+
+  <script>
+    // current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Formspree: inline success without redirect
+    const form = document.getElementById('signup-form');
+    const ok   = document.getElementById('ok');
+    const err  = document.getElementById('err');
+    const btn  = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.style.display = 'none';
+      err.style.display = 'none';
+      btn.disabled = true;
+
+      try {
+        const resp = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+
+        if (resp.ok) {
+          form.reset();
+          ok.style.display = 'block';
+        } else {
+          err.style.display = 'block';
+        }
+      } catch {
+        err.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
