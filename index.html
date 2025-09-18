@@ -10,11 +10,28 @@
     :root { --max: 960px; }
     html,body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif; color:#0f172a; background:#f8fafc; }
     header { padding: 48px 20px 28px; text-align:center; }
-    .logo img { height: 80px; width:auto; display:block; margin:0 auto 16px; }
+
+.logo img {
+  height: 120px;       /* bigger logo */
+  width: auto;
+  display: block;
+  margin: 0 auto 24px; /* center + space below */
+}
+
+.card {
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  box-shadow:0 6px 24px rgba(2,6,23,.06);
+  padding:24px;
+  max-width:500px;     /* limit width */
+  margin: 0 auto;      /* center horizontally */
+}
+
+
     h1 { font-size: clamp(28px, 5vw, 44px); margin:0 0 8px; letter-spacing:-0.02em; }
     p.lead { font-size: clamp(16px, 2.5vw, 18px); color:#334155; margin:0 auto; max-width:700px; }
     .wrap { max-width: var(--max); margin: 24px auto 64px; padding: 0 20px; }
-    .card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; box-shadow:0 6px 24px rgba(2,6,23,.06); padding:20px; }
     h2 { margin:0 0 12px; font-size:22px; }
     .muted { color:#475569; font-size:14px; margin:0 0 12px; }
     label { font-size:14px; color:#475569; display:block; margin:8px 0 6px; }
