@@ -8,49 +8,123 @@
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <style>
     :root { --max: 960px; }
-    html,body { margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif; color:#0f172a; background:#f8fafc; }
-    header { padding: 48px 20px 28px; text-align:center; }
 
-.logo img {
-  height: 120px;       /* bigger logo */
-  width: auto;
-  display: block;
-  margin: 0 auto 24px; /* center + space below */
-}
+    /* Base layout */
+    html, body {
+      margin: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      color: #0f172a;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+    }
 
-.card {
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:16px;
-  box-shadow:0 6px 24px rgba(2,6,23,.06);
-  padding:24px;
-  max-width:500px;     /* limit width */
-  margin: 0 auto;      /* center horizontally */
-}
+    /* Center everything in the viewport */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;   /* vertical center */
+      align-items: center;       /* horizontal center */
+      padding: 40px 20px;
+      text-align: center;
+    }
 
+    /* Logo */
+    .logo img {
+      height: 150px;   /* bigger logo */
+      width: auto;
+      display: block;
+      margin: 0 auto 28px;
+    }
 
-    h1 { font-size: clamp(28px, 5vw, 44px); margin:0 0 8px; letter-spacing:-0.02em; }
-    p.lead { font-size: clamp(16px, 2.5vw, 18px); color:#334155; margin:0 auto; max-width:700px; }
-    .wrap { max-width: var(--max); margin: 24px auto 64px; padding: 0 20px; }
-    h2 { margin:0 0 12px; font-size:22px; }
-    .muted { color:#475569; font-size:14px; margin:0 0 12px; }
-    label { font-size:14px; color:#475569; display:block; margin:8px 0 6px; }
-    input, textarea { width:100%; border:1px solid #e2e8f0; border-radius:12px; padding:12px; font:inherit; background:#fff; }
-    .btn { display:inline-flex; align-items:center; gap:8px; padding:12px 16px; border-radius:12px; border:1px solid #e2e8f0; background:#0ea5e9; color:#fff; font-weight:600; cursor:pointer; }
-    .btn:disabled { opacity:.6; cursor:not-allowed; }
-    footer { text-align:center; color:#64748b; padding:30px 20px; font-size:13px; }
+    /* Headline + subhead */
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    .lead {
+      font-size: clamp(16px, 2.5vw, 18px);
+      color: #334155;
+      margin: 0 auto;
+      max-width: 700px;
+    }
+
+    /* Form card */
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(2,6,23,.06);
+      padding: 24px;
+      max-width: 560px;  /* nice width on desktop */
+      width: 100%;
+      margin-top: 28px;
+      text-align: left;
+    }
+    h2 { margin: 0 0 10px; font-size: 22px; }
+    .muted { color: #475569; font-size: 14px; margin: 0 0 12px; }
+
+    label { font-size: 14px; color: #475569; display: block; margin: 10px 0 6px; }
+    input, textarea {
+      width: 100%;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px;
+      font: inherit;
+      background: #fff;
+    }
+    textarea { min-height: 110px; }
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: none;
+      background: #0ea5e9;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background .2s ease;
+    }
+    .btn:hover { background: #0284c7; }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+
+    footer {
+      text-align: center;
+      color: #64748b;
+      padding: 24px 20px;
+      font-size: 13px;
+    }
+
+    /* success / error banners */
+    .banner {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+    .ok { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .err { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
   </style>
 </head>
 <body>
-  <header>
+  <div class="main">
     <div class="logo">
+      <!-- If your file is in /assets/, change to src="assets/logo.png" -->
       <img src="logo.png" alt="50 Grams Logo">
     </div>
+
     <h1>High-Protein Meals, Made Easy</h1>
     <p class="lead">Join the early list for chef-level proteins with zero hassle. We’ll send founder updates, first-access promos, and our quick-start guide.</p>
-  </header>
 
-  <div class="wrap">
     <section class="card">
       <h2>Get on the list</h2>
       <p class="muted">Sign up for Free Figo Smart Sous Vide.</p>
@@ -70,16 +144,14 @@
         <button type="submit" class="btn" id="submitBtn">Join Now</button>
       </form>
 
-      <div class="muted" id="fs-success" style="display:none;margin-top:12px;color:#065f46;background:#ecfdf5;border:1px solid #a7f3d0;padding:12px;border-radius:12px;">
-        Thanks! Please check your email to confirm, then you’re on the list.
-      </div>
-      <div class="muted" id="fs-error" style="display:none;margin-top:12px;color:#991b1b;background:#fef2f2;border:1px solid #fecaca;padding:12px;border-radius:12px;">
-        Something went wrong. Please try again or email info@eatfigo.com.
-      </div>
+      <div class="banner ok" id="fs-success">Thanks! Please check your email to confirm, then you’re on the list.</div>
+      <div class="banner err" id="fs-error">Something went wrong. Please try again or email info@eatfigo.com.</div>
     </section>
   </div>
 
-  <footer>© <script>document.write(new Date().getFullYear());</script> 50 Grams — Built on GitHub Pages</footer>
+  <footer>
+    © <script>document.write(new Date().getFullYear());</script> 50 Grams — Built on GitHub Pages
+  </footer>
 
   <script>
     // In-page success without redirect
@@ -87,15 +159,30 @@
     const success = document.getElementById('fs-success');
     const errBox = document.getElementById('fs-error');
     const btn = document.getElementById('submitBtn');
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      success.style.display = 'none'; errBox.style.display = 'none'; btn.disabled = true;
+      success.style.display = 'none';
+      errBox.style.display = 'none';
+      btn.disabled = true;
+
       try {
-        const r = await fetch(form.action, { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(form) });
-        if (r.ok) { form.reset(); success.style.display = 'block'; }
-        else { errBox.style.display = 'block'; }
-      } catch { errBox.style.display = 'block'; }
-      btn.disabled = false;
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        if (res.ok) {
+          form.reset();
+          success.style.display = 'block';
+        } else {
+          errBox.style.display = 'block';
+        }
+      } catch {
+        errBox.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+      }
     });
   </script>
 </body>
