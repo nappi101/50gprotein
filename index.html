@@ -9,7 +9,6 @@
   <style>
     :root { --max: 960px; }
 
-    /* Base layout */
     html, body {
       margin: 0;
       height: 100%;
@@ -20,26 +19,24 @@
       flex-direction: column;
     }
 
-    /* Center everything in the viewport */
     .main {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;   /* vertical center */
-      align-items: center;       /* horizontal center */
+      justify-content: center;
+      align-items: center;
       padding: 40px 20px;
       text-align: center;
     }
 
-    /* Logo */
+    /* Logo (doubled size) */
     .logo img {
-      height: 150px;   /* bigger logo */
+      height: 300px;  /* doubled */
       width: auto;
       display: block;
       margin: 0 auto 28px;
     }
 
-    /* Headline + subhead */
     h1 {
       font-size: clamp(28px, 5vw, 44px);
       margin: 0 0 12px;
@@ -52,22 +49,28 @@
       max-width: 700px;
     }
 
-    /* Form card */
     .card {
       background: #fff;
       border: 1px solid #e5e7eb;
       border-radius: 16px;
       box-shadow: 0 6px 24px rgba(2,6,23,.06);
       padding: 24px;
-      max-width: 560px;  /* nice width on desktop */
+      max-width: 560px;
       width: 100%;
       margin-top: 28px;
-      text-align: left;
+      text-align: center; /* center text inside the form card */
     }
+
     h2 { margin: 0 0 10px; font-size: 22px; }
     .muted { color: #475569; font-size: 14px; margin: 0 0 12px; }
 
-    label { font-size: 14px; color: #475569; display: block; margin: 10px 0 6px; }
+    label {
+      font-size: 14px;
+      color: #475569;
+      display: block;
+      margin: 10px 0 6px;
+      text-align: center; /* center labels */
+    }
     input, textarea {
       width: 100%;
       border: 1px solid #e2e8f0;
@@ -75,13 +78,12 @@
       padding: 12px;
       font: inherit;
       background: #fff;
+      text-align: center; /* center text in inputs */
     }
     textarea { min-height: 110px; }
 
     .btn {
-      display: block;
-      width: 100%;
-      text-align: center;
+      display: inline-block;
       padding: 14px 20px;
       border-radius: 12px;
       border: none;
@@ -103,7 +105,6 @@
       font-size: 13px;
     }
 
-    /* success / error banners */
     .banner {
       display: none;
       margin-top: 12px;
@@ -118,7 +119,6 @@
 <body>
   <div class="main">
     <div class="logo">
-      <!-- If your file is in /assets/, change to src="assets/logo.png" -->
       <img src="logo.png" alt="50 Grams Logo">
     </div>
 
@@ -136,10 +136,9 @@
         <label for="message">Anything you'd like to add? (optional)</label>
         <textarea id="message" name="message" placeholder="Tell us what protein boxes you want…"></textarea>
 
-        <!-- helpful metadata -->
         <input type="hidden" name="_subject" value="New signup from 50gprotein.com">
         <input type="hidden" name="source" value="GitHub Pages landing">
-        <input type="text" name="_gotcha" style="display:none"> <!-- honeypot -->
+        <input type="text" name="_gotcha" style="display:none">
 
         <button type="submit" class="btn" id="submitBtn">Join Now</button>
       </form>
@@ -154,7 +153,6 @@
   </footer>
 
   <script>
-    // In-page success without redirect
     const form = document.getElementById('fs-form');
     const success = document.getElementById('fs-success');
     const errBox = document.getElementById('fs-error');
