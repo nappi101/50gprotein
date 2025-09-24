@@ -34,8 +34,8 @@
     .logo { display: block; margin: 8px auto 20px; width: 220px; height: auto; }
     h1 { font-size: clamp(28px, 5.4vw, 42px); margin: 0 0 8px; letter-spacing: -0.02em; line-height: 1.12; }
     p.lead { margin: 0 auto 22px; color: var(--muted); max-width: 48ch; font-size: clamp(16px, 2.8vw, 18px); line-height: 1.5; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 16px 22px; margin: 0 auto; max-width: var(--maxw); }
-    .card h2 { margin: 0 0 6px; font-size: 22px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 16px 22px; margin: 0 auto 40px; max-width: var(--maxw); }
+    .card h2 { margin: 0 0 12px; font-size: 22px; }
     .muted { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
     form { margin-top: 6px; }
     input, textarea, button { font: inherit; width: min(560px, 92%); display: block; margin: 10px auto; padding: 12px 14px; border-radius: 12px; }
@@ -48,8 +48,7 @@
     .err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
     footer { margin-top: 22px; color: #64748b; font-size: 13px; }
     .survey-block { margin: 48px auto; max-width: 900px; }
-    .survey-block h2 { font-size: 24px; margin-bottom: 16px; }
-    .survey-frame { border:1px solid var(--border); border-radius:12px; width:100%; min-height:6000px; }
+    .survey-frame { width: 100%; min-height: 3000px; border: none; border-radius: var(--radius); }
   </style>
 </head>
 <body>
@@ -62,6 +61,7 @@
       We’ll send founder updates, first-access promos, and our quick-start guide.
     </p>
 
+    <!-- Signup Card -->
     <section class="card" aria-labelledby="cta">
       <h2 id="cta">Get on the list</h2>
       <p class="muted">Sign up for Free Figo Smart Sous Vide.</p>
@@ -81,14 +81,13 @@
       <div id="err" class="notice err">Hmm, something went wrong. Please try again or email <a href="mailto:info@eatfigo.com">info@eatfigo.com</a>.</div>
     </section>
 
-    <!-- Survey Section -->
-    <section class="survey-block">
+    <!-- Survey Card -->
+    <section class="card survey-block">
       <h2>High-Protein Solutions Market Survey</h2>
       <iframe
         id="survey-frame"
         class="survey-frame"
         src="https://www.surveymonkey.com/r/3KYDZDT?smcxref=site_embed"
-        frameborder="0"
         scrolling="no"
         loading="lazy"
         title="50g Protein Market Survey"
@@ -130,13 +129,13 @@
       }
     });
 
-    // Auto-resize SurveyMonkey iframe (with very tall fallback)
+    // Auto-resize SurveyMonkey iframe with fallback height
     (function () {
       var frame = document.getElementById('survey-frame');
       function setH(h) {
         var n = parseInt(h || 0, 10);
         if (!isFinite(n) || n < 0) n = 0;
-        var min = 3800; // safe triple size
+        var min = 3000; // fallback safe size
         frame.style.height = Math.max(n, min) + 'px';
       }
       window.addEventListener('message', function (e) {
