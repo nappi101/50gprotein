@@ -136,7 +136,7 @@
       function setH(h) {
         var n = parseInt(h || 0, 10);
         if (!isFinite(n) || n < 0) n = 0;
-        var min = 4600; // safe triple size
+        var min = 3800; // safe triple size
         frame.style.height = Math.max(n, min) + 'px';
       }
       window.addEventListener('message', function (e) {
