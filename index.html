@@ -48,7 +48,7 @@
     .err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
     footer { margin-top: 22px; color: #64748b; font-size: 13px; }
     .survey-block { margin: 48px auto; max-width: 900px; }
-    .survey-frame { width: 100%; min-height: 3000px; border: none; border-radius: var(--radius); }
+    .survey-frame { width: 100%; border: none; border-radius: var(--radius); }
   </style>
 </head>
 <body>
@@ -87,11 +87,12 @@
       <iframe
         id="survey-frame"
         class="survey-frame"
-        src="https://www.surveymonkey.com/r/3KYDZDT?smcxref=site_embed"
+        src="https://www.surveymonkey.com/r/3KYDZDT?smcxref=site_embed&v=3000a"  <!-- cache-buster -->
         scrolling="no"
         loading="lazy"
         title="50g Protein Market Survey"
-        allowtransparency="true">
+        allowtransparency="true"
+        style="height: 4600px;">
       </iframe>
     </section>
 
@@ -102,7 +103,7 @@
     // current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Formspree: inline success without redirect
+    // Formspree inline success
     const form = document.getElementById('signup-form');
     const ok   = document.getElementById('ok');
     const err  = document.getElementById('err');
@@ -113,7 +114,6 @@
       ok.style.display = 'none';
       err.style.display = 'none';
       btn.disabled = true;
-
       try {
         const resp = await fetch(form.action, {
           method: 'POST',
@@ -122,30 +122,32 @@
         });
         if (resp.ok) { form.reset(); ok.style.display = 'block'; }
         else { err.style.display = 'block'; }
-      } catch {
-        err.style.display = 'block';
-      } finally {
-        btn.disabled = false;
-      }
+      } catch { err.style.display = 'block'; }
+      finally { btn.disabled = false; }
     });
 
-    // Auto-resize SurveyMonkey iframe with fallback height
+    // Auto-grow to larger than 4600px if SurveyMonkey posts a height
     (function () {
       var frame = document.getElementById('survey-frame');
       function setH(h) {
         var n = parseInt(h || 0, 10);
-        if (!isFinite(n) || n < 0) n = 0;
-        var min = 4600; // fallback safe size
-        frame.style.height = Math.max(n, min) + 'px';
+        if (isFinite(n) && n > parseInt(frame.style.height || '0', 10)) {
+          frame.style.height = n + 'px';
+        }
       }
       window.addEventListener('message', function (e) {
         var d = e.data;
-        try {
-          if (typeof d === 'string' && d.indexOf('surveymonkey-iframe-height') === 0) {
-            setH(d.split(':')[1]);
-          }
-        } catch (_) { }
+        if (typeof d === 'string' && d.indexOf('surveymonkey-iframe-height') === 0) {
+          setH(d.split(':')[1]);
+        }
       }, false);
+
+      // Orientation change nudger (iOS)
+      window.addEventListener('orientationchange', function () {
+        var cur = parseInt(frame.style.height || '0', 10);
+        frame.style.height = (cur + 1) + 'px';
+        setTimeout(function(){ frame.style.height = cur + 'px'; }, 50);
+      });
     })();
   </script>
 </body>
