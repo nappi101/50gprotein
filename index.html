@@ -48,7 +48,7 @@
     .err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
     footer { margin-top: 22px; color: #64748b; font-size: 13px; }
     .survey-block { margin: 48px auto; max-width: 900px; }
-    .survey-frame { width: 100%; border: none; border-radius: var(--radius); }
+    .survey-frame { width: 100%; height: 4600px; border: none; border-radius: var(--radius); }
   </style>
 </head>
 <body>
@@ -87,12 +87,12 @@
       <iframe
         id="survey-frame"
         class="survey-frame"
-        src="https://www.surveymonkey.com/r/3KYDZDT?smcxref=site_embed&v=3000a"  <!-- cache-buster -->
-        scrolling="no"
+        src="https://www.surveymonkey.com/r/3KYDZDT?smcxref=site_embed&v=fix1"
+        frameborder="0"
+        scrolling="yes"
         loading="lazy"
         title="50g Protein Market Survey"
-        allowtransparency="true"
-        style="height: 4600px;">
+        allowtransparency="true">
       </iframe>
     </section>
 
@@ -125,30 +125,6 @@
       } catch { err.style.display = 'block'; }
       finally { btn.disabled = false; }
     });
-
-    // Auto-grow to larger than 4600px if SurveyMonkey posts a height
-    (function () {
-      var frame = document.getElementById('survey-frame');
-      function setH(h) {
-        var n = parseInt(h || 0, 10);
-        if (isFinite(n) && n > parseInt(frame.style.height || '0', 10)) {
-          frame.style.height = n + 'px';
-        }
-      }
-      window.addEventListener('message', function (e) {
-        var d = e.data;
-        if (typeof d === 'string' && d.indexOf('surveymonkey-iframe-height') === 0) {
-          setH(d.split(':')[1]);
-        }
-      }, false);
-
-      // Orientation change nudger (iOS)
-      window.addEventListener('orientationchange', function () {
-        var cur = parseInt(frame.style.height || '0', 10);
-        frame.style.height = (cur + 1) + 'px';
-        setTimeout(function(){ frame.style.height = cur + 'px'; }, 50);
-      });
-    })();
   </script>
 </body>
 </html>
