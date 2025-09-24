@@ -135,7 +135,7 @@
       function setH(h) {
         var n = parseInt(h || 0, 10);
         if (!isFinite(n) || n < 0) n = 0;
-        var min = 3000; // fallback safe size
+        var min = 4600; // fallback safe size
         frame.style.height = Math.max(n, min) + 'px';
       }
       window.addEventListener('message', function (e) {
