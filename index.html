@@ -43,10 +43,13 @@
     textarea { resize: vertical; min-height: 96px; }
     button { border: 1px solid var(--border); background: var(--brand); color: #fff; font-weight: 700; cursor: pointer; }
     button:hover { background: var(--brand-hover); }
-    .notice { display: none; width: min(560px, 92%); margin: 12px auto 0; padding: 12px 14px; border-radius: 12px; font-size: 14px; text-align: left; }
+    .notice { display: false; width: min(560px, 92%); margin: 12px auto 0; padding: 12px 14px; border-radius: 12px; font-size: 14px; text-align: left; }
     .ok { background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
     .err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
     footer { margin-top: 22px; color: #64748b; font-size: 13px; }
+    .survey-block { margin: 48px auto; max-width: 900px; }
+    .survey-block h2 { font-size: 24px; margin-bottom: 16px; }
+    .survey-frame { border:1px solid var(--border); border-radius:12px; width:100%; }
   </style>
 </head>
 <body>
@@ -74,8 +77,22 @@
         <button type="submit" id="submitBtn">Join Now</button>
       </form>
 
-      <div id="ok"  class="notice ok">Thanks! Please check your inbox to confirm — you’re almost on the list.</div>
+      <div id="ok" class="notice ok">Thanks! Please check your inbox to confirm — you’re almost on the list.</div>
       <div id="err" class="notice err">Hmm, something went wrong. Please try again or email <a href="mailto:info@eatfigo.com">info@eatfigo.com</a>.</div>
+    </section>
+
+    <!-- Survey Section -->
+    <section class="survey-block">
+      <h2>High-Protein Solutions Market Survey</h2>
+      <iframe
+        id="survey-frame"
+        class="survey-frame"
+        src="https://www.surveymonkey.com/r/3KYDZDT?smcxref=site_embed"
+        frameborder="0"
+        scrolling="no"
+        loading="lazy"
+        title="50g Protein Market Survey">
+      </iframe>
     </section>
 
     <footer>© <span id="year"></span> 50 Grams — Built on GitHub Pages</footer>
@@ -105,30 +122,20 @@
         });
         if (resp.ok) { form.reset(); ok.style.display = 'block'; }
         else { err.style.display = 'block'; }
-      } catch { err.style.display = 'block'; }
-      finally { btn.disabled = false; }
+      } catch {
+        err.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+      }
     });
-  </script>
 
-  <!-- SurveyMonkey Website Collector: place just before </body> -->
-  <script>
-  (function(t,e,s,n){
-    var o,a,c;
-    t.SMCX=t.SMCX||[];
-    if(!e.getElementById(n)){
-      o=e.getElementsByTagName(s);
-      a=o[o.length-1];
-      c=e.createElement(s);
-      c.type="text/javascript";
-      c.async=true;
-      c.id=n;
-      c.src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd9T_2B8LnR_2FcnyczJ6rE8nLb2o4NOPfJ49Cxs3E4Kemc40.js";
-      a.parentNode.insertBefore(c,a);
-    }
-  })(window,document,"script","smcx-sdk");
+    // Auto-resize SurveyMonkey iframe
+    window.addEventListener("message", function(e) {
+      if (typeof e.data === "string" && e.data.indexOf("surveymonkey-iframe-height") === 0) {
+        var height = e.data.split(":")[1];
+        document.getElementById("survey-frame").style.height = height + "px";
+      }
+    }, false);
   </script>
-  <noscript>
-    <a href="https://www.surveymonkey.com" target="_blank" rel="noopener">Create your own user feedback survey</a>
-  </noscript>
 </body>
 </html>
