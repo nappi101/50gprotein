@@ -30,84 +30,23 @@
       min-height: 100vh;
       text-align: center;
     }
-    .container {
-      width: 100%;
-      max-width: var(--maxw);
-      padding: 28px 18px 48px;
-      margin: 0 auto;
-    }
-    .logo {
-      display: block;
-      margin: 8px auto 20px;
-      width: 220px;   /* larger logo */
-      height: auto;
-    }
-    h1 {
-      font-size: clamp(28px, 5.4vw, 42px);
-      margin: 0 0 8px;
-      letter-spacing: -0.02em;
-      line-height: 1.12;
-    }
-    p.lead {
-      margin: 0 auto 22px;
-      color: var(--muted);
-      max-width: 48ch;
-      font-size: clamp(16px, 2.8vw, 18px);
-      line-height: 1.5;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px 16px 22px;
-      margin: 0 auto;
-      max-width: var(--maxw);
-    }
-    .card h2 {
-      margin: 0 0 6px;
-      font-size: 22px;
-    }
+    .container { width: 100%; max-width: var(--maxw); padding: 28px 18px 48px; margin: 0 auto; }
+    .logo { display: block; margin: 8px auto 20px; width: 220px; height: auto; }
+    h1 { font-size: clamp(28px, 5.4vw, 42px); margin: 0 0 8px; letter-spacing: -0.02em; line-height: 1.12; }
+    p.lead { margin: 0 auto 22px; color: var(--muted); max-width: 48ch; font-size: clamp(16px, 2.8vw, 18px); line-height: 1.5; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 16px 22px; margin: 0 auto; max-width: var(--maxw); }
+    .card h2 { margin: 0 0 6px; font-size: 22px; }
     .muted { color: var(--muted); font-size: 14px; margin: 0 0 14px; }
     form { margin-top: 6px; }
-    input, textarea, button {
-      font: inherit;
-      width: min(560px, 92%);
-      display: block;
-      margin: 10px auto;
-      padding: 12px 14px;
-      border-radius: 12px;
-    }
-    input, textarea {
-      border: 1px solid var(--border);
-      background: #fff;
-      text-align: left; /* keep fields left-aligned while surrounding text stays centered */
-    }
+    input, textarea, button { font: inherit; width: min(560px, 92%); display: block; margin: 10px auto; padding: 12px 14px; border-radius: 12px; }
+    input, textarea { border: 1px solid var(--border); background: #fff; text-align: left; }
     textarea { resize: vertical; min-height: 96px; }
-    button {
-      border: 1px solid var(--border);
-      background: var(--brand);
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-    }
+    button { border: 1px solid var(--border); background: var(--brand); color: #fff; font-weight: 700; cursor: pointer; }
     button:hover { background: var(--brand-hover); }
-    .notice {
-      display: none;
-      width: min(560px, 92%);
-      margin: 12px auto 0;
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-size: 14px;
-      text-align: left;
-    }
+    .notice { display: none; width: min(560px, 92%); margin: 12px auto 0; padding: 12px 14px; border-radius: 12px; font-size: 14px; text-align: left; }
     .ok { background:#ecfdf5; border:1px solid #a7f3d0; color:#065f46; }
     .err { background:#fef2f2; border:1px solid #fecaca; color:#991b1b; }
-    footer {
-      margin-top: 22px;
-      color: #64748b;
-      font-size: 13px;
-    }
+    footer { margin-top: 22px; color: #64748b; font-size: 13px; }
   </style>
 </head>
 <body>
@@ -128,7 +67,6 @@
         <input type="email" name="email" placeholder="you@example.com" aria-label="Your email" required />
         <textarea name="message" placeholder="Tell us what protein boxes you want…" aria-label="Optional message"></textarea>
 
-        <!-- optional metadata -->
         <input type="hidden" name="_subject" value="New signup from 50gprotein.com" />
         <input type="hidden" name="source" value="GitHub Pages landing" />
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
@@ -165,19 +103,32 @@
           headers: { 'Accept': 'application/json' },
           body: new FormData(form)
         });
-
-        if (resp.ok) {
-          form.reset();
-          ok.style.display = 'block';
-        } else {
-          err.style.display = 'block';
-        }
-      } catch {
-        err.style.display = 'block';
-      } finally {
-        btn.disabled = false;
-      }
+        if (resp.ok) { form.reset(); ok.style.display = 'block'; }
+        else { err.style.display = 'block'; }
+      } catch { err.style.display = 'block'; }
+      finally { btn.disabled = false; }
     });
   </script>
+
+  <!-- SurveyMonkey Website Collector: place just before </body> -->
+  <script>
+  (function(t,e,s,n){
+    var o,a,c;
+    t.SMCX=t.SMCX||[];
+    if(!e.getElementById(n)){
+      o=e.getElementsByTagName(s);
+      a=o[o.length-1];
+      c=e.createElement(s);
+      c.type="text/javascript";
+      c.async=true;
+      c.id=n;
+      c.src="https://widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgd9T_2B8LnR_2FcnyczJ6rE8nLb2o4NOPfJ49Cxs3E4Kemc40.js";
+      a.parentNode.insertBefore(c,a);
+    }
+  })(window,document,"script","smcx-sdk");
+  </script>
+  <noscript>
+    <a href="https://www.surveymonkey.com" target="_blank" rel="noopener">Create your own user feedback survey</a>
+  </noscript>
 </body>
 </html>
